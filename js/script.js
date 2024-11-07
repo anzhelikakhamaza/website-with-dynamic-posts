@@ -1,5 +1,4 @@
 window.onload = fetchCreate();
-const search = document.getElementById("search");
 let postsData = [];
 
 function createElement(tag, className = "", content = "") {
@@ -77,6 +76,10 @@ function createPostElement(post) {
     createCommentForm(commentSection)
   );
 
+  postTitle.addEventListener("click", function (postId) {
+    window.location.href = `https://jsonplaceholder.typicode.com/posts/?postId=${postId}`;
+  });
+
   return postItem;
 }
 
@@ -86,7 +89,7 @@ function showComments(
   showCommentsButton,
   hideCommentsButton
 ) {
-  fetch("https://jsonplaceholder.typicode.com/comments?postId=${postId}")
+  fetch(`https://jsonplaceholder.typicode.com/comments?postId=${postId}`)
     .then((response) => response.json())
     .then((comments) => {
       comments.forEach((comment) => {
@@ -175,12 +178,23 @@ function pushTheComment(commentData) {
     .catch((error) => console.error("Error posting comment:", error));
 }
 
-search.addEventListener("input", (e) => {
+function sortPosts() {
+  const search = document.getElementById("search");
+
+  search.addEventListener("input", definePosts);
+}
+
+function definePosts(e) {
   const value = e.target.value.toLowerCase();
-  postsData.forEach((post) => {
-    const isVisible =
-      post.title.toLowerCase().includes(value) ||
-      post.body.toLowerCase().includes(value);
-    post.element.classList.toggle("hide", !isVisible);
-  });
-});
+
+  if (value.length > 3) {
+    postsData.forEach((post) => {
+      const isVisible =
+        post.title.toLowerCase().includes(value) ||
+        post.body.toLowerCase().includes(value);
+      post.element.classList.toggle("hide", !isVisible);
+    });
+  } else if (value.length <= 3) {
+    post.element.classList.remove("hide");
+  }
+}
