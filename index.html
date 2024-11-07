@@ -8,14 +8,21 @@
   </head>
 
   <body>
-		
-	<main><form class="form-wrapper">
-			<input type="text" class="search" id="search" placeholder="Search for..." required>
-			<input type="submit" value="go" class="submit" id="submit">
-	</form></main>
+    <header>
+      <div class="container header-content">
+        <div class="search-bar">
+          <input
+            id="search"
+            type="search"
+            placeholder="&#x1F50D; Start typing to search..."
+          />
+        </div>
+      </div>
+    </header>
 
-    <div class="post-list"></div>
-		
+    <main class="container">
+      <div class="search-display"></div>
+      <div class="post-list"></div>
     </main>
     <script src="js/script.js"></script>
   </body>

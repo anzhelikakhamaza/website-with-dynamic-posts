@@ -1,187 +1,140 @@
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f5f7fa;
+  font-family: "Roboto", sans-serif;
+  background-color: #f5f5f5;
   color: #333;
   margin: 0;
-  padding: 0;
-}
-
-h4 {
-  margin: 0;
-  font-size: 1.5em;
-  color: #2c3e50;
+  padding: 20px;
+  line-height: 1.6;
 }
 
 .post-list {
-  list-style-type: none;
+  list-style: none;
   padding: 0;
-  margin: 20px;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 .post-list-item {
-  background: #ffffff;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  margin-bottom: 15px;
-  padding: 15px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s, box-shadow 0.2s;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  padding: 20px;
+  transition: transform 0.2s ease-in-out;
 }
 
 .post-list-item:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px);
 }
 
 .post-title {
+  font-size: 1.5rem;
+  font-weight: 700;
   margin-bottom: 10px;
+  color: #333;
 }
 
 .post-text {
-  margin-bottom: 15px;
-  line-height: 1.5;
+  font-size: 1rem;
+  color: #555;
 }
 
 .show-comments,
-.hide-comments {
+.hide-comments,
+.add-new-comment-button {
   display: inline-block;
-  margin-top: 10px;
-  padding: 8px 12px;
-  border-radius: 4px;
+  background-color: #007bff;
   color: #fff;
-  background-color: #3498db;
+  padding: 8px 12px;
+  border-radius: 5px;
   text-decoration: none;
+  margin-top: 10px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.2s ease-in-out;
 }
 
 .show-comments:hover,
-.hide-comments:hover {
-  background-color: #2980b9;
+.hide-comments:hover,
+.add-new-comment-button:hover {
+  background-color: #0056b3;
 }
 
 .comment-section {
+  background-color: #f0f0f0;
+  border-radius: 8px;
+  padding: 15px;
   margin-top: 15px;
-  border-top: 1px solid #e0e0e0;
-  padding-top: 10px;
 }
 
 .comment {
-  background: #f9f9f9;
-  border: 1px solid #e0e0e0;
-  border-radius: 4px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
   margin-bottom: 10px;
-  padding: 10px;
+}
+
+.comment:last-child {
+  border-bottom: none;
 }
 
 .comment-author {
   font-weight: bold;
+  margin-bottom: 5px;
 }
 
-.add-new-comment {
+.comment-email {
+  font-style: italic;
+  color: #777;
+  margin-bottom: 5px;
+}
+
+.comment-text {
+  font-size: 0.9rem;
+  color: #444;
+}
+
+.comment-form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.comment-author-input,
+.comment-email-input,
+.comment-body-input {
   width: 100%;
-  margin-top: 5px;
-  padding: 10px;
-  border: 1px solid #e0e0e0;
-  border-radius: 4px;
-  resize: none;
-}
-
-.add-new-comment-button {
-  margin-top: 5px;
-  padding: 8px 12px;
-  background-color: #27ae60;
-  border: none;
-  border-radius: 4px;
-  color: #fff;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.add-new-comment-button:hover {
-  background-color: #219653;
-}
-
-.form-wrapper {
-  background-color: #f6f6f6;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#f6f6f6), to(#eae8e8));
-  background-image: -webkit-linear-gradient(top, #f6f6f6, #eae8e8);
-  background-image: -moz-linear-gradient(top, #f6f6f6, #eae8e8);
-  background-image: -ms-linear-gradient(top, #f6f6f6, #eae8e8);
-  background-image: -o-linear-gradient(top, #f6f6f6, #eae8e8);
-  background-image: linear-gradient(top, #f6f6f6, #eae8e8);
-  border-color: #dedede #bababa #aaa #bababa;
-  border-style: solid;
-  border-width: 1px;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  border-radius: 10px;
-  -webkit-box-shadow: 0 3px 3px rgba(255,255,255,.1), 0 3px 0 #bbb, 0 4px 0 #aaa, 0 5px 5px #444;
-  -moz-box-shadow: 0 3px 3px rgba(255,255,255,.1), 0 3px 0 #bbb, 0 4px 0 #aaa, 0 5px 5px #444;
-  box-shadow: 0 3px 3px rgba(255,255,255,.1), 0 3px 0 #bbb, 0 4px 0 #aaa, 0 5px 5px #444;
-  margin: 100px auto;
-  overflow: hidden;
   padding: 8px;
-  width: 450px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
 }
 
-.form-wrapper #search {
-  border: 1px solid #CCC;
-  -webkit-box-shadow: 0 1px 1px #ddd inset, 0 1px 0 #FFF;
-  -moz-box-shadow: 0 1px 1px #ddd inset, 0 1px 0 #FFF;
-  box-shadow: 0 1px 1px #ddd inset, 0 1px 0 #FFF;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
-  color: #999;
-  float: left;
-  font: 16px Lucida Sans, Trebuchet MS, Tahoma, sans-serif;
-  height: 20px;
-  padding: 10px;
-  width: 320px;
-}
-
-.form-wrapper #search:focus {
-  border-color: #aaa;
-  -webkit-box-shadow: 0 1px 1px #bbb inset;
-  -moz-box-shadow: 0 1px 1px #bbb inset;
-  box-shadow: 0 1px 1px #bbb inset;
-  outline: 0;
-}
-
-.form-wrapper #search:-moz-placeholder,
-.form-wrapper #search:-ms-input-placeholder,
-.form-wrapper #search::-webkit-input-placeholder {
-  color: #999;
-  font-weight: normal;
-}
-
-.form-wrapper #submit {
-  background-color: #0483a0;
-  -moz-border-radius: 3px;
-  -webkit-border-radius: 3px;
-  border-radius: 3px;
-  -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.3) inset, 0 1px 0 #FFF;
-  -moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.3) inset, 0 1px 0 #FFF;
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.3) inset, 0 1px 0 #FFF;
-  color: #fafafa;
+.submit-comment-button {
+  align-self: flex-start;
+  background-color: #28a745;
+  color: #fff;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
   cursor: pointer;
-  height: 42px;
-  float: right;
-  font: 15px Arial, Helvetica;
-  padding: 0;
-  text-transform: uppercase;
-  text-shadow: 0 1px 0 rgba(0, 0 ,0, .3);
-  width: 100px;
+  transition: background-color 0.2s ease-in-out;
 }
 
-.form-wrapper #submit:active {
-  -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5) inset;
-  -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5) inset;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5) inset;
-  outline: 0;
+.submit-comment-button:hover {
+  background-color: #218838;
 }
 
-.form-wrapper #submit::-moz-focus-inner {
-  border: 0;
+#search {
+  display: block;
+  width: 100%;
+  max-width: 600px;
+  margin: 20px auto 40px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+.hide {
+  display: none;
 }
