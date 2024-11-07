@@ -1,4 +1,6 @@
-window.onload = fetchCreate();
+fetchCreate();
+addListenerOnSearchInput();
+
 let postsData = [];
 
 function createElement(tag, className = "", content = "") {
@@ -138,6 +140,7 @@ function createCommentForm(commentSection) {
   );
 
   const commentFormContainer = createElement("div", "comment-form-container");
+
   commentFormContainer.append(
     commentAuthorInput,
     commentEmailInput,
@@ -154,7 +157,8 @@ function createCommentForm(commentSection) {
     };
 
     const newCommentElement = createCommentElement(newCommentData);
-    commentSection.appendChild(newCommentElement);
+
+    pushTheComment();
 
     commentAuthorInput.value = "";
     commentEmailInput.value = "";
@@ -163,7 +167,7 @@ function createCommentForm(commentSection) {
 }
 
 function pushTheComment(commentData) {
-  fetch("https://jsonplaceholder.typicode.com/comments", {
+  fetch("https://jsonplaceholder.typicode.com/posts/1/comments", {
     method: "POST",
     body: JSON.stringify(commentData),
     headers: {
@@ -171,20 +175,24 @@ function pushTheComment(commentData) {
     },
   })
     .then((response) => console.log(response.json()))
-    .then((data) => {
-      console.log("Comment posted:", data);
-      return data;
+    .then(() => {
+      fetch(`https://jsonplaceholder.typicode.com/comments?postId=1`)
+        .then((response) => response.json())
+        .then((comments) => console.log(comments))
+        .catch((error) => console.error("Error fetching comments:", error));
     })
     .catch((error) => console.error("Error posting comment:", error));
 }
 
-function sortPosts() {
+function addListenerOnSearchInput() {
   const search = document.getElementById("search");
 
   search.addEventListener("input", definePosts);
 }
 
 function definePosts(e) {
+  console.log(e);
+
   const value = e.target.value.toLowerCase();
 
   if (value.length > 3) {
@@ -194,7 +202,11 @@ function definePosts(e) {
         post.body.toLowerCase().includes(value);
       post.element.classList.toggle("hide", !isVisible);
     });
-  } else if (value.length <= 3) {
-    post.element.classList.remove("hide");
+  }
+
+  if (!value) {
+    const postList = document.querySelector(".post-list");
+    postList.innerHTML = "";
+    fetchCreate();
   }
 }
