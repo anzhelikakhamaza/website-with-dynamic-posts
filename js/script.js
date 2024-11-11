@@ -3,10 +3,11 @@ addListenerOnSearchInput();
 
 let postsData = [];
 
-function createElement(tag, className = "", content = "") {
+function createElement(tag, className = "", content = "", placeholder = "") {
   const element = document.createElement(tag);
   if (className) element.classList.add(className);
   if (content) element.innerHTML = content;
+  if (placeholder) element.placeholder = placeholder;
   return element;
 }
 
@@ -75,11 +76,11 @@ function createPostElement(post) {
   );
 
   addCommentButton.addEventListener("click", () =>
-    createCommentForm(commentSection)
+    createCommentForm(commentSection, addCommentButton)
   );
 
-  postTitle.addEventListener("click", function (postId) {
-    window.location.href = `https://jsonplaceholder.typicode.com/posts/?postId=${postId}`;
+  postTitle.addEventListener("click", function () {
+    window.location.href = `jsonplaceholder.typicode.com/posts/?id=${post.id}`;
   });
 
   return postItem;
@@ -129,10 +130,25 @@ function createCommentElement(comment) {
   return commentContainer;
 }
 
-function createCommentForm(commentSection) {
-  const commentAuthorInput = createElement("textarea", "comment-author-input");
-  const commentEmailInput = createElement("textarea", "comment-email-input");
-  const commentBodyInput = createElement("textarea", "comment-body-input");
+function createCommentForm(commentSection, addCommentButton) {
+  const commentAuthorInput = createElement(
+    "textarea",
+    "comment-author-input",
+    "",
+    "Author Name"
+  );
+  const commentEmailInput = createElement(
+    "textarea",
+    "comment-email-input",
+    "",
+    "Email"
+  );
+  const commentBodyInput = createElement(
+    "textarea",
+    "comment-body-input",
+    "",
+    "Comment"
+  );
   const submitCommentButton = createElement(
     "button",
     "submit-comment-button",
@@ -149,7 +165,10 @@ function createCommentForm(commentSection) {
   );
   commentSection.prepend(commentFormContainer);
 
-  submitCommentButton.addEventListener("click", () => {
+  addCommentButton.classList.toggle("submit-button-disabled");
+  addCommentButton.disabled = true;
+
+  submitCommentButton.addEventListener("click", (e) => {
     const newCommentData = {
       name: commentAuthorInput.value,
       email: commentEmailInput.value,
@@ -166,8 +185,8 @@ function createCommentForm(commentSection) {
   });
 }
 
-function pushTheComment(commentData) {
-  fetch("https://jsonplaceholder.typicode.com/posts/1/comments", {
+function pushTheComment(postId, commentData) {
+  fetch(`https://jsonplaceholder.typicode.com/posts/${postId}/comments`, {
     method: "POST",
     body: JSON.stringify(commentData),
     headers: {
@@ -176,7 +195,7 @@ function pushTheComment(commentData) {
   })
     .then((response) => console.log(response.json()))
     .then(() => {
-      fetch(`https://jsonplaceholder.typicode.com/comments?postId=1`)
+      fetch(`https://jsonplaceholder.typicode.com/comments?postId=${postId}`)
         .then((response) => response.json())
         .then((comments) => console.log(comments))
         .catch((error) => console.error("Error fetching comments:", error));

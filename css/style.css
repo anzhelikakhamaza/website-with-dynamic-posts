@@ -51,6 +51,7 @@ body {
   margin-top: 10px;
   cursor: pointer;
   transition: background-color 0.2s ease-in-out;
+  border-color: unset;
 }
 
 .show-comments:hover,
@@ -136,5 +137,9 @@ body {
 }
 
 .hide {
+  display: none;
+}
+
+.submit-button-disabled {
   display: none;
 }
