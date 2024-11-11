@@ -33,6 +33,13 @@ function createPostElement(post) {
     "post-text",
     `${post.body.slice(0, 100)}...`
   );
+
+  const sharePost = createElement(
+    "button",
+    "share-the-post-button",
+    "Share the Post"
+  );
+
   const showCommentsButton = createElement(
     "button",
     "show-comments",
@@ -52,6 +59,7 @@ function createPostElement(post) {
   hideCommentsButton.style.display = "none";
 
   postItem.append(
+    sharePost,
     postTitle,
     postContent,
     showCommentsButton,
@@ -61,6 +69,16 @@ function createPostElement(post) {
 
   const commentSection = createElement("div", "comment-section");
   postItem.appendChild(commentSection);
+
+  const shareData = {
+    title: "New Post",
+    text: "Check This Post",
+    url: `https://jsonplaceholder.typicode.com/posts/?id=${post.id}`,
+  };
+
+  sharePost.addEventListener("click", async () => {
+    await navigator.share(shareData);
+  });
 
   showCommentsButton.addEventListener("click", () =>
     showComments(
@@ -80,7 +98,7 @@ function createPostElement(post) {
   );
 
   postTitle.addEventListener("click", function () {
-    window.location.href = `jsonplaceholder.typicode.com/posts/?id=${post.id}`;
+    window.location.href = `https://jsonplaceholder.typicode.com/posts/?id=${post.id}`;
   });
 
   return postItem;

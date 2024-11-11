@@ -21,12 +21,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const id = urlParams.get("id");
 
   openThePost(id);
-
-  console.log(id);
 });
 
 function openThePost(id) {
-  fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
+  fetch(`https://jsonplaceholder.typicode.com/posts/?id=${id}`)
     .then((response) => response.json())
     .then((post) => {
       const postList = document.querySelector(".post-list");
