@@ -90,7 +90,12 @@ function createPostElement(post) {
   );
 
   hideCommentsButton.addEventListener("click", () =>
-    hideComments(commentSection, showCommentsButton, hideCommentsButton)
+    hideComments(
+      commentSection,
+      showCommentsButton,
+      hideCommentsButton,
+      addCommentButton
+    )
   );
 
   addCommentButton.addEventListener("click", () =>
@@ -98,7 +103,7 @@ function createPostElement(post) {
   );
 
   postTitle.addEventListener("click", function () {
-    window.location.href = `https://jsonplaceholder.typicode.com/posts/?id=${post.id}`;
+    window.location.href = `additional.html?id=${post.id}`;
   });
 
   return postItem;
@@ -124,10 +129,16 @@ function showComments(
     .catch((error) => console.error("Error fetching comments:", error));
 }
 
-function hideComments(commentSection, showCommentsButton, hideCommentsButton) {
+function hideComments(
+  commentSection,
+  showCommentsButton,
+  hideCommentsButton,
+  addCommentButton
+) {
   commentSection.innerHTML = "";
   hideCommentsButton.style.display = "none";
   showCommentsButton.style.display = "inline-block";
+  addCommentButton.disabled = false;
 }
 
 function createCommentElement(comment) {
